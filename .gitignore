@@ -1,0 +1,21 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# Dataset cache/downloads
+data/
+
+# Generated experiment outputs
+results/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
