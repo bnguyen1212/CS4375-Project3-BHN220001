@@ -14,8 +14,22 @@ import torch
 from torch.utils.data import DataLoader, random_split
 from torchvision import datasets, transforms
 
-def _build_transform():
-    return transforms.Compose([transforms.ToTensor()])
+def _build_transform(dataset_name: str):
+    if dataset_name == "mnist":
+        return transforms.Compose(
+            [
+                transforms.ToTensor(),
+                transforms.Normalize((0.1307,), (0.3081,)),
+            ]
+        )
+    if dataset_name == "cifar10":
+        return transforms.Compose(
+            [
+                transforms.ToTensor(),
+                transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
+            ]
+        )
+    raise ValueError("dataset_name must be 'mnist' or 'cifar10'")
 
 
 def load_mnist(
@@ -41,7 +55,7 @@ def load_mnist(
     if pin_memory is None:
         pin_memory = torch.cuda.is_available()
 
-    transform = _build_transform()
+    transform = _build_transform("mnist")
 
     train_dataset_full = datasets.MNIST(root=data_dir, train=True, download=True, transform=transform)
     test_dataset = datasets.MNIST(root=data_dir, train=False, download=True, transform=transform)
@@ -97,7 +111,7 @@ def load_cifar10(
     if pin_memory is None:
         pin_memory = torch.cuda.is_available()
 
-    transform = _build_transform()
+    transform = _build_transform("cifar10")
 
     train_dataset_full = datasets.CIFAR10(root=data_dir, train=True, download=True, transform=transform)
     test_dataset = datasets.CIFAR10(root=data_dir, train=False, download=True, transform=transform)
