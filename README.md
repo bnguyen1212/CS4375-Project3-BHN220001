@@ -1,41 +1,45 @@
 # Reproducibility Instructions
 
-This project can be reproduced in either:
-- Local VS Code/Jupyter (recommended for grading)
-- Google Colab (requires Drive setup or repo clone)
+Run this project either locally (VS Code/Jupyter) or in Google Colab.
 
-## Option A: Local VS Code/Jupyter (Recommended)
+## Local (VS Code/Jupyter)
 
-1. Open this project folder in VS Code.
-2. Create/activate a Python environment (if not already active).
+1. Open this folder in VS Code.
+2. Create and activate a virtual environment.
 3. Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Open `project.ipynb`.
-5. Select a local Python kernel from this project environment.
-6. Run notebook cells in order from top to bottom.
+4. Open project.ipynb.
+5. Select the notebook kernel from your project virtual environment.
+6. Run all cells from top to bottom.
 
-Expected output artifacts (created by the last cell):
-- `results/all_tuning_results.csv`
-- `results/best_validation_configs.csv`
-- `results/best_models_test_results.csv`
+Notes:
+- MNIST/CIFAR-10 are downloaded automatically by torchvision if missing.
+- Results are saved under results/.
 
-## Option B: Google Colab
+Expected CSV outputs:
+- results/mlp_all_tuning_results.csv
+- results/mlp_best_validation_configs.csv
+- results/mlp_best_models_test_results.csv
+- results/cnn_all_tuning_results.csv
+- results/cnn_best_validation_configs.csv
+- results/cnn_best_models_test_results.csv
 
-Use this only if you are running the notebook with a Colab kernel.
+## Google Colab
 
-### B1. Put the project files where Colab can access them
-Choose one method:
-1. Upload project folder to Google Drive under `MyDrive`, or
-2. Clone the repository in Colab runtime.
+1. Open project.ipynb in Colab.
+2. Run the setup cell that clones the repository and changes into the project directory.
+3. Install dependencies in a Colab cell:
 
-### B2. Open and run the notebook
-1. Open `project.ipynb` in Colab.
-2. Run Cell 2 first (Colab/Drive setup cell).
-   - It mounts Drive and tries to locate `dataset_loaders.py`.
-   - Confirm it prints `Using project root: ...`.
-3. Run Cell 3 next (imports).
-4. Continue running remaining cells in order.
+```python
+%pip install -r requirements.txt
+```
+
+4. Run the remaining cells in order.
+
+Colab notes:
+- Runtime type: GPU is recommended (Runtime -> Change runtime type -> GPU).
+- If the runtime restarts after package install, rerun cells from the top.
